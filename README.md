@@ -1,26 +1,82 @@
-# Global Guide Chatbot Demo
+# AI Agent Culture Chatbot
 
-Static chatbot website demo for the AI_agent_culture assignment. The site is based on the MQ Global Culture Hub idea and turns the assignment content into a culture-support chatbot.
+Spring Boot REST API chatbot for MQ culture knowledge.
 
-## Open the demo
+The app stores custom knowledge in PostgreSQL, builds a knowledge context from the `knowledge_base` table, calls the OpenAI Chat Completions API with `RestTemplate`, and returns a concise answer.
 
-Open `index.html` directly in a browser, or run a local preview server:
+## Tech Stack
+
+- Java 17
+- Spring Boot 3.x
+- Spring Data JPA
+- PostgreSQL / Supabase
+- Maven
+- OpenAI API via `RestTemplate`
+
+## Environment Variables
 
 ```bash
-python3 -m http.server 8000
+export DATABASE_URL="jdbc:postgresql://YOUR_SUPABASE_HOST:5432/postgres"
+export DATABASE_USERNAME="YOUR_DB_USERNAME"
+export DATABASE_PASSWORD="YOUR_DB_PASSWORD"
+export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 ```
 
-Then visit:
+## Run
+
+```bash
+mvn spring-boot:run
+```
+
+The API runs on:
 
 ```text
-http://localhost:8000/
+http://localhost:8080
 ```
 
-## Included
+## Endpoints
 
-- Chatbot-first homepage
-- Free-text chatbot input
-- Quick prompt buttons
-- Project-specific answers for cultural misunderstanding, isolation, BMC, VPC, Cynefin, socio-technical analysis, Responsible AI, limitations, and future directions
-- Knowledge base section showing how the chatbot was built from the assignment topic
-- Submission timeline and team roles
+### POST `/api/chat`
+
+Request:
+
+```json
+{
+  "message": "How can I avoid cultural misunderstanding in group work?"
+}
+```
+
+Response:
+
+```json
+{
+  "reply": "..."
+}
+```
+
+### POST `/api/knowledge`
+
+Request:
+
+```json
+{
+  "title": "Cross-cultural group work",
+  "content": "At MQ, students may come from different communication cultures...",
+  "category": "culture"
+}
+```
+
+### GET `/api/knowledge`
+
+Returns all knowledge entries.
+
+### DELETE `/api/knowledge/{id}`
+
+Deletes a knowledge entry by id.
+
+## Notes
+
+- No frontend.
+- No Spring Security.
+- CORS is open for development.
+- `data.sql` includes 3 culture-focused sample knowledge entries.
