@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,79 @@ public class ChatService {
 
     private static final String MODEL = "gpt-4o-mini";
     private static final int MAX_TOKENS = 500;
+    private static final String OUT_OF_SCOPE_REPLY = "I don't have information about that yet.";
+    private static final String GREETING_REPLY = "Hi! I can help with MQ student culture, belonging, cultural misunderstanding, group work communication, and responsible culture-chatbot behaviour.";
+    private static final List<String> IN_SCOPE_KEYWORDS = List.of(
+            "mq",
+            "macquarie",
+            "culture",
+            "cultural",
+            "student life",
+            "student",
+            "students",
+            "campus",
+            "university",
+            "sydney",
+            "international",
+            "domestic",
+            "group work",
+            "feedback",
+            "belonging",
+            "belong",
+            "lonely",
+            "loneliness",
+            "isolated",
+            "isolation",
+            "friend",
+            "friends",
+            "connection",
+            "community",
+            "peer",
+            "club",
+            "clubs",
+            "communication",
+            "misunderstanding",
+            "stereotype",
+            "stereotypes",
+            "bias",
+            "fairness",
+            "privacy",
+            "harm",
+            "responsible",
+            "safe",
+            "language exchange",
+            "culture shock"
+    );
+    private static final List<String> OUT_OF_SCOPE_KEYWORDS = List.of(
+            "code",
+            "coding",
+            "programming",
+            "java",
+            "spring",
+            "spring boot",
+            "python",
+            "javascript",
+            "react",
+            "html",
+            "css",
+            "sql",
+            "database",
+            "api",
+            "algorithm",
+            "debug",
+            "bug",
+            "error",
+            "deploy",
+            "deployment",
+            "github",
+            "maven",
+            "math",
+            "calculate",
+            "medical",
+            "legal",
+            "finance",
+            "financial"
+    );
 
     private final KnowledgeRepository knowledgeRepository;
     private final RestTemplate restTemplate;
@@ -43,6 +117,18 @@ public class ChatService {
     }
 
     public String chat(String userMessage) {
+        if (userMessage == null || userMessage.isBlank()) {
+            return OUT_OF_SCOPE_REPLY;
+        }
+
+        if (isGreeting(userMessage)) {
+            return GREETING_REPLY;
+        }
+
+        if (!isCultureScope(userMessage)) {
+            return OUT_OF_SCOPE_REPLY;
+        }
+
         String knowledgeContext = buildKnowledgeContext();
         String systemPrompt = buildSystemPrompt(knowledgeContext);
 
@@ -88,9 +174,19 @@ public class ChatService {
         return """
                 You are a helpful assistant with knowledge about student life and culture
                 at Macquarie University (MQ) in Sydney, Australia. Answer questions ONLY
-                based on the following knowledge base provided. If the answer is not found
-                in the knowledge base, say: 'I don't have information about that yet.'
-                Do not make up information. Be friendly and concise.
+                based on the following knowledge base provided.
+
+                Scope rules:
+                - Only answer questions about MQ student culture, student belonging,
+                  cultural misunderstanding, cross-cultural communication, respectful
+                  group work, student isolation, student community connection, and
+                  responsible behaviour for a culture-support chatbot.
+                - Do not answer questions about coding, programming, deployment,
+                  general technology, maths, legal, medical, financial, or other
+                  unrelated topics.
+                - If the answer is outside this scope or not found in the knowledge
+                  base, say exactly: 'I don't have information about that yet.'
+                - Do not make up information. Be friendly and concise.
 
                 Knowledge base:
                 %s""".formatted(knowledgeContext);
@@ -102,6 +198,33 @@ public class ChatService {
                 .path(0)
                 .path("message")
                 .path("content")
-                .asText("I don't have information about that yet.");
+                .asText(OUT_OF_SCOPE_REPLY);
+    }
+
+    private boolean isCultureScope(String userMessage) {
+        String normalizedMessage = normalize(userMessage);
+
+        boolean asksOutOfScopeTopic = OUT_OF_SCOPE_KEYWORDS.stream()
+                .anyMatch(normalizedMessage::contains);
+
+        if (asksOutOfScopeTopic) {
+            return false;
+        }
+
+        return IN_SCOPE_KEYWORDS.stream()
+                .anyMatch(normalizedMessage::contains);
+    }
+
+    private boolean isGreeting(String userMessage) {
+        String normalizedMessage = normalize(userMessage);
+        return normalizedMessage.equals("hi")
+                || normalizedMessage.equals("hello")
+                || normalizedMessage.equals("hey")
+                || normalizedMessage.equals("xin chao")
+                || normalizedMessage.equals("chao");
+    }
+
+    private String normalize(String value) {
+        return value.toLowerCase(Locale.ROOT).trim();
     }
 }
