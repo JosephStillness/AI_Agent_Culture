@@ -1,8 +1,8 @@
 # AI Agent Culture Chatbot
 
-Spring Boot REST API chatbot for MQ culture knowledge.
+Spring Boot REST API chatbot with a React frontend for MQ culture knowledge.
 
-The app stores custom knowledge in PostgreSQL, builds a knowledge context from the `knowledge_base` table, calls the OpenAI Chat Completions API with `RestTemplate`, and returns a concise answer.
+The app stores custom knowledge in PostgreSQL, builds a knowledge context from the `knowledge_base` table, calls the OpenAI Chat Completions API with `RestTemplate`, and returns a concise answer. The React frontend lets users chat with the bot and manage culture-only knowledge entries.
 
 ## Tech Stack
 
@@ -12,8 +12,9 @@ The app stores custom knowledge in PostgreSQL, builds a knowledge context from t
 - PostgreSQL / Supabase
 - Maven
 - OpenAI API via `RestTemplate`
+- React + Vite frontend
 
-## Environment Variables
+## Backend Environment Variables
 
 ```bash
 export DATABASE_URL="jdbc:postgresql://YOUR_SUPABASE_HOST:5432/postgres"
@@ -22,7 +23,7 @@ export DATABASE_PASSWORD="YOUR_DB_PASSWORD"
 export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"
 ```
 
-## Run
+## Run Backend
 
 ```bash
 mvn spring-boot:run
@@ -33,6 +34,24 @@ The API runs on:
 ```text
 http://localhost:8080
 ```
+
+## Run Frontend
+
+In another terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The React app runs on:
+
+```text
+http://localhost:5173
+```
+
+For local development, Vite proxies `/api` to `http://localhost:8080`, so you do not need `VITE_API_BASE_URL`.
 
 ## Endpoints
 
@@ -76,7 +95,34 @@ Deletes a knowledge entry by id.
 
 ## Notes
 
-- No frontend.
 - No Spring Security.
 - CORS is open for development.
 - `data.sql` includes 3 culture-focused sample knowledge entries.
+
+## Deploy Frontend
+
+Deploy the `frontend` folder to Vercel, Netlify, or another static hosting service.
+
+For Vercel:
+
+- Root Directory: `frontend`
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Environment Variable:
+
+```text
+VITE_API_BASE_URL=https://YOUR_BACKEND_URL
+```
+
+## Deploy Backend
+
+Deploy the Spring Boot app to a Java hosting platform such as Render, Railway, Fly.io, or another service that supports Java 17.
+
+Set these backend environment variables in the hosting dashboard:
+
+```text
+DATABASE_URL=jdbc:postgresql://YOUR_SUPABASE_HOST:5432/postgres
+DATABASE_USERNAME=YOUR_DB_USERNAME
+DATABASE_PASSWORD=YOUR_DB_PASSWORD
+OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+```
