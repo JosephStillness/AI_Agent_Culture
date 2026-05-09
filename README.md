@@ -4,6 +4,12 @@ Spring Boot REST API chatbot with a React frontend for MQ culture knowledge.
 
 The app stores custom knowledge in PostgreSQL, builds a knowledge context from the `knowledge_base` table, calls the OpenAI Chat Completions API with `RestTemplate`, and returns a concise answer. The React frontend lets users chat with the bot and manage culture-only knowledge entries.
 
+The backend includes a scope guard before the OpenAI call. Questions outside MQ student culture, belonging, cultural misunderstanding, respectful group work, student isolation, community connection, or responsible culture-chatbot behaviour return:
+
+```text
+I don't have information about that yet.
+```
+
 ## Tech Stack
 
 - Java 17
@@ -98,6 +104,7 @@ Deletes a knowledge entry by id.
 - No Spring Security.
 - CORS is open for development.
 - `data.sql` includes 3 culture-focused sample knowledge entries.
+- Out-of-scope questions, such as coding or deployment questions, are blocked before calling OpenAI.
 
 ## Deploy Frontend
 
