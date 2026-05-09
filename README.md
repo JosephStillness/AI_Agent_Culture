@@ -1,6 +1,6 @@
-# MQ Global Culture Hub Demo
+# Global Guide Chatbot Demo
 
-Static website demo for the AI_agent_culture assignment.
+Static chatbot website demo for the AI_agent_culture assignment. The site is based on the MQ Global Culture Hub idea and turns the assignment content into a culture-support chatbot.
 
 ## Open the demo
 
@@ -16,13 +16,11 @@ Then visit:
 http://localhost:8000/
 ```
 
-## Sections included
+## Included
 
-- Introduction and team allocation
-- Task 1: Business Model Canvas
-- Task 2: Value Proposition Canvas
-- Task 3: Cynefin business domain
-- Task 4: Socio-technical analysis
-- Task 5: Responsible AI principles
-- Conclusion with limitations and future directions
-- Interactive mock chatbot demo
+- Chatbot-first homepage
+- Free-text chatbot input
+- Quick prompt buttons
+- Project-specific answers for cultural misunderstanding, isolation, BMC, VPC, Cynefin, socio-technical analysis, Responsible AI, limitations, and future directions
+- Knowledge base section showing how the chatbot was built from the assignment topic
+- Submission timeline and team roles

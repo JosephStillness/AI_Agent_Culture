@@ -3,356 +3,214 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MQ Global Culture Hub</title>
+    <title>Global Guide · AI Agent Culture Chatbot</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="site-header" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="MQ Global Culture Hub home">
-        <span class="brand-mark">GH</span>
+    <header class="site-header">
+      <a class="brand" href="#chat" aria-label="Global Guide home">
+        <span class="brand-mark">GG</span>
         <span>
-          <strong>MQ Global Culture Hub</strong>
-          <small>AI_agent_culture demo</small>
+          <strong>Global Guide</strong>
+          <small>AI Agent Culture</small>
         </span>
       </a>
-      <nav class="nav-links" aria-label="Report sections">
-        <a href="#business">BMC</a>
-        <a href="#value">VPC</a>
-        <a href="#domain">Cynefin</a>
-        <a href="#sociotech">Socio-technical</a>
-        <a href="#responsible">Responsible AI</a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#chat">Chatbot</a>
+        <a href="#knowledge">Knowledge Base</a>
+        <a href="#submission">Submission</a>
       </nav>
     </header>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
+    <main>
+      <section id="chat" class="chat-hero" aria-labelledby="page-title">
         <img
           class="hero-image"
           src="assets/global-culture-hero.png"
-          alt="A diverse group of university students talking together on a modern campus"
+          alt="Students from different backgrounds talking together on campus"
         />
         <div class="hero-overlay"></div>
-        <div class="hero-content">
-          <div class="hero-copy">
-            <p class="eyebrow">Draft due 19 May · Final due 26 May · Individual due 7 June</p>
-            <h1 id="hero-title">A culture support business where AI helps students find real belonging.</h1>
-            <p class="hero-lede">
-              MQ Global Culture Hub combines a guided AI chatbot, moderated student stories, and campus events to
-              reduce cultural misunderstanding, loneliness, and social isolation among diverse MQ students.
+
+        <div class="app-shell">
+          <aside class="project-panel" aria-label="Project context">
+            <p class="eyebrow">MQ Global Culture Hub</p>
+            <h1 id="page-title">Culture support chatbot for student belonging.</h1>
+            <p class="lead">
+              A demo AI agent that helps MQ students understand cultural situations, reduce misunderstanding, and
+              connect with real student communities.
             </p>
-            <div class="hero-actions">
-              <a class="button primary" href="#demo">Try the demo</a>
-              <a class="button secondary" href="#business">View business model</a>
-            </div>
-          </div>
 
-          <aside class="deadline-panel" aria-label="Submission timeline and team allocation">
-            <div>
-              <span class="panel-label">Team Roles</span>
-              <h2>Report Build</h2>
+            <div class="insight-strip" aria-label="Core project logic">
+              <div>
+                <span>Problem</span>
+                <strong>Loneliness, isolation, misunderstanding</strong>
+              </div>
+              <div>
+                <span>Solution</span>
+                <strong>AI guidance plus community experience</strong>
+              </div>
+              <div>
+                <span>AI role</span>
+                <strong>Support tool, not the whole business</strong>
+              </div>
             </div>
-            <ul class="role-list">
-              <li><span>Intro, conclusion, format, visuals</span><strong>Thomas</strong></li>
-              <li><span>Task 1 · BMC</span><strong>Nguyet Anh Hoang</strong></li>
-              <li><span>Task 2 · VPC</span><strong>Dat</strong></li>
-              <li><span>Task 3 · Cynefin domain</span><strong>Nhung</strong></li>
-              <li><span>Task 4 · Socio-technical</span><strong>Toan</strong></li>
-              <li><span>Task 5 · Responsible AI</span><strong>Linh</strong></li>
-            </ul>
+
+            <div class="bot-rules">
+              <h2>What this chatbot knows</h2>
+              <ul>
+                <li>Business Model Canvas for MQ Global Culture Hub</li>
+                <li>Value Proposition Canvas focused on pains and gains</li>
+                <li>Cynefin domain: complex, context-dependent, evolving</li>
+                <li>Socio-technical analysis: people, process, tech, data, governance</li>
+                <li>Responsible AI: bias, fairness, misinformation, harm prevention, privacy</li>
+              </ul>
+            </div>
           </aside>
-        </div>
-      </section>
 
-      <section class="problem-band" aria-labelledby="problem-title">
-        <div class="section-heading">
-          <p class="eyebrow">Introduction</p>
-          <h2 id="problem-title">The business problem is social, not only informational.</h2>
-        </div>
-        <div class="problem-grid">
-          <article>
-            <span class="mini-label">Real pain</span>
-            <h3>Misunderstanding</h3>
-            <p>Students often misread humour, etiquette, group work expectations, or conversation norms.</p>
-          </article>
-          <article>
-            <span class="mini-label">Real pain</span>
-            <h3>Isolation</h3>
-            <p>New international and postgraduate students can struggle to form trusted connections quickly.</p>
-          </article>
-          <article>
-            <span class="mini-label">Business response</span>
-            <h3>Community plus AI</h3>
-            <p>The chatbot explains situations, but the hub's value comes from peer stories, events, and moderation.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="demo" class="demo-section" aria-labelledby="demo-title">
-        <div class="section-heading">
-          <p class="eyebrow">Website Demo</p>
-          <h2 id="demo-title">Global Guide chatbot</h2>
-          <p>
-            The chatbot is positioned as a support layer. It routes students toward community knowledge, safer
-            explanations, and relevant campus activities instead of pretending to be a cultural expert.
-          </p>
-        </div>
-
-        <div class="demo-layout">
-          <div class="scenario-board" aria-label="Example user journey">
-            <div class="journey-step active">
-              <span>1</span>
-              <div>
-                <h3>Ask a cultural question</h3>
-                <p>A student describes an awkward social or study situation.</p>
-              </div>
-            </div>
-            <div class="journey-step">
-              <span>2</span>
-              <div>
-                <h3>Receive context-aware guidance</h3>
-                <p>The bot offers possible interpretations, not a single stereotype-based answer.</p>
-              </div>
-            </div>
-            <div class="journey-step">
-              <span>3</span>
-              <div>
-                <h3>Connect to real people</h3>
-                <p>The hub suggests student stories, clubs, and events that build confidence and belonging.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="chatbot" aria-label="Global Guide chatbot demo">
+          <section class="chatbot-panel" aria-label="Global Guide chatbot">
             <div class="chatbot-header">
-              <div>
+              <div class="agent-identity">
                 <span class="status-dot"></span>
-                <strong>Global Guide</strong>
+                <div>
+                  <strong>Global Guide</strong>
+                  <small>Community-assisted culture chatbot</small>
+                </div>
               </div>
-              <span>Community-assisted AI</span>
+              <span class="model-pill">Demo agent</span>
             </div>
+
             <div class="chat-window" id="chatWindow" aria-live="polite">
               <div class="message bot">
                 <p>
-                  Hi, I can help explain cultural situations and suggest MQ community spaces. Choose a prompt to try
-                  the demo.
+                  Hi, I am Global Guide. Ask me about cultural misunderstanding, making friends, the business model,
+                  Cynefin, socio-technical analysis, or Responsible AI for this project.
                 </p>
               </div>
             </div>
-            <div class="prompt-grid" aria-label="Sample chatbot prompts">
-              <button data-prompt="misunderstanding">Awkward group work moment</button>
-              <button data-prompt="friends">How can I make friends?</button>
-              <button data-prompt="event">Find a low-pressure event</button>
-              <button data-prompt="safety">Responsible AI concern</button>
+
+            <div class="quick-prompts" aria-label="Suggested prompts">
+              <button type="button" data-prompt="misunderstanding">Group work misunderstanding</button>
+              <button type="button" data-prompt="friends">I feel isolated</button>
+              <button type="button" data-prompt="bmc">Explain the BMC</button>
+              <button type="button" data-prompt="vpc">Explain the VPC</button>
+              <button type="button" data-prompt="cynefin">Why is it complex?</button>
+              <button type="button" data-prompt="responsible">Responsible AI risks</button>
             </div>
-          </div>
+
+            <form class="chat-form" id="chatForm">
+              <label class="sr-only" for="chatInput">Ask Global Guide</label>
+              <input
+                id="chatInput"
+                type="text"
+                autocomplete="off"
+                placeholder="Ask Global Guide about this culture chatbot..."
+              />
+              <button type="submit">Send</button>
+            </form>
+          </section>
         </div>
       </section>
 
-      <section id="business" class="report-section" aria-labelledby="business-title">
+      <section id="knowledge" class="knowledge-section" aria-labelledby="knowledge-title">
         <div class="section-heading">
-          <p class="eyebrow">Task 1 · Business Model Canvas</p>
-          <h2 id="business-title">A realistic business design where the chatbot is one part of the system.</h2>
-        </div>
-        <div class="canvas-grid">
-          <article>
-            <span class="mini-label">Customer Segments</span>
-            <h3>Students who need cultural confidence</h3>
-            <p>International students, domestic students wanting cross-cultural connection, and new postgraduate students.</p>
-          </article>
-          <article>
-            <span class="mini-label">Value Proposition</span>
-            <h3>Belonging through practical cultural sensemaking</h3>
-            <p>Reduces confusion and isolation through AI guidance, real student stories, and community events.</p>
-          </article>
-          <article>
-            <span class="mini-label">Channels</span>
-            <h3>Digital plus campus touchpoints</h3>
-            <p>Chatbot, mobile-friendly hub, social media, MQ clubs, orientation programs, and peer-led events.</p>
-          </article>
-          <article>
-            <span class="mini-label">Customer Relationships</span>
-            <h3>Continuous peer engagement</h3>
-            <p>Students return to ask questions, share experiences, join events, and build trusted campus networks.</p>
-          </article>
-          <article>
-            <span class="mini-label">Revenue Streams</span>
-            <h3>Partnership-supported service</h3>
-            <p>Sponsored intercultural events, university support funding, partner workshops, and optional premium training.</p>
-          </article>
-          <article>
-            <span class="mini-label">Key Resources</span>
-            <h3>Community knowledge that competitors cannot copy easily</h3>
-            <p>Moderated student stories, chatbot knowledge base, event partnerships, trust, and platform data insights.</p>
-          </article>
-          <article>
-            <span class="mini-label">Key Activities</span>
-            <h3>Moderate, connect, and improve</h3>
-            <p>Maintain chatbot responses, verify community content, run events, review harms, and update cultural guidance.</p>
-          </article>
-          <article>
-            <span class="mini-label">Key Partners</span>
-            <h3>Embedded campus ecosystem</h3>
-            <p>MQ clubs, student organisations, wellbeing services, faculty groups, international office, and alumni mentors.</p>
-          </article>
-          <article>
-            <span class="mini-label">Cost Structure</span>
-            <h3>People, platform, and governance costs</h3>
-            <p>AI platform hosting, moderation labour, event operations, privacy controls, and responsible AI review.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="value" class="split-section" aria-labelledby="value-title">
-        <div class="section-heading">
-          <p class="eyebrow">Task 2 · Value Proposition Canvas</p>
-          <h2 id="value-title">The value is confidence, belonging, and network access.</h2>
-        </div>
-        <div class="vpc-grid">
-          <article class="vpc-panel">
-            <span class="mini-label">Customer Profile</span>
-            <h3>Student jobs, pains, and gains</h3>
-            <dl>
-              <dt>Jobs</dt>
-              <dd>Make friends, understand others, adapt socially, participate in group work, and feel safe asking questions.</dd>
-              <dt>Pains</dt>
-              <dd>Loneliness, awkward situations, fear of offending people, language anxiety, and cultural misinterpretation.</dd>
-              <dt>Gains</dt>
-              <dd>Belonging, confidence, cross-cultural network, practical social knowledge, and stronger campus identity.</dd>
-            </dl>
-          </article>
-          <article class="vpc-panel accent">
-            <span class="mini-label">Value Map</span>
-            <h3>Products, pain relievers, and gain creators</h3>
-            <dl>
-              <dt>Products and services</dt>
-              <dd>Global Guide chatbot, moderated story library, peer circles, themed events, and partner club referrals.</dd>
-              <dt>Pain relievers</dt>
-              <dd>Explains possible cultural meanings, reduces uncertainty, provides non-judgemental guidance, and escalates risk.</dd>
-              <dt>Gain creators</dt>
-              <dd>Turns advice into connection through real stories, inclusive events, and repeat community engagement.</dd>
-            </dl>
-          </article>
-        </div>
-      </section>
-
-      <section id="domain" class="domain-section" aria-labelledby="domain-title">
-        <div class="section-heading">
-          <p class="eyebrow">Task 3 · Cynefin</p>
-          <h2 id="domain-title">Business domain: Complex</h2>
+          <p class="eyebrow">Knowledge Base</p>
+          <h2 id="knowledge-title">The chatbot is built from your assignment idea.</h2>
           <p>
-            Cultural belonging is not predictable enough for a simple rulebook. The right response depends on context,
-            identity, language, relationship history, and changing student norms.
+            Global Guide answers from this project-specific logic: real cultural pains, community-based value, and
+            responsible use of AI inside a wider student support business.
           </p>
         </div>
-        <div class="domain-grid">
-          <article>
-            <span class="mini-label">Why complex</span>
-            <h3>Patterns emerge through interaction</h3>
-            <p>The hub must sense what students experience, learn from stories, and adapt the service over time.</p>
-          </article>
-          <article>
-            <span class="mini-label">Not obvious</span>
-            <h3>No universal cultural rule</h3>
-            <p>The same behaviour can mean different things across cultures, relationships, and campus situations.</p>
-          </article>
-          <article>
-            <span class="mini-label">Management response</span>
-            <h3>Probe, sense, respond</h3>
-            <p>Run small events, review chatbot logs safely, monitor feedback, and improve guidance with community input.</p>
-          </article>
-        </div>
-      </section>
 
-      <section id="sociotech" class="report-section" aria-labelledby="sociotech-title">
-        <div class="section-heading">
-          <p class="eyebrow">Task 4 · Socio-technical Analysis</p>
-          <h2 id="sociotech-title">The chatbot only works when the people, process, data, and governance fit together.</h2>
-        </div>
-        <div class="system-map" aria-label="Socio-technical system map">
+        <div class="knowledge-grid">
           <article>
-            <span>People</span>
-            <h3>Diverse students and moderators</h3>
-            <p>Students ask questions and share experiences; moderators protect inclusion and avoid harmful generalisations.</p>
-          </article>
-          <article>
-            <span>Process</span>
-            <h3>Ask, share, review, connect</h3>
-            <p>Questions become guidance, useful stories become searchable content, and repeated issues inform events.</p>
-          </article>
-          <article>
-            <span>Technology</span>
-            <h3>AI guide plus community platform</h3>
-            <p>The chatbot supports sensemaking while the platform hosts stories, event discovery, and feedback loops.</p>
-          </article>
-          <article>
-            <span>Data</span>
-            <h3>Moderated experiential knowledge</h3>
-            <p>Anonymous questions, tagged stories, event feedback, and flagged responses improve service quality.</p>
-          </article>
-          <article>
-            <span>Governance</span>
-            <h3>Rules for trust</h3>
-            <p>Content standards, privacy controls, escalation paths, and bias reviews keep the service accountable.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="responsible" class="responsible-section" aria-labelledby="responsible-title">
-        <div class="section-heading">
-          <p class="eyebrow">Task 5 · Responsible AI</p>
-          <h2 id="responsible-title">Relevant principles for a culture-focused AI service</h2>
-        </div>
-        <div class="principle-grid">
-          <article>
-            <h3>Bias and fairness</h3>
-            <p>Responses must avoid cultural stereotypes and represent multiple perspectives instead of treating one view as normal.</p>
-          </article>
-          <article>
-            <h3>Misinformation control</h3>
-            <p>User-generated stories are labelled as lived experience, moderated, and not treated as official cultural facts.</p>
-          </article>
-          <article>
-            <h3>Harm prevention</h3>
-            <p>Offensive, discriminatory, or unsafe advice is flagged, removed, and escalated to trained human support where needed.</p>
-          </article>
-          <article>
-            <h3>Transparency</h3>
-            <p>The chatbot states its limits clearly: it supports reflection and connection, but it is not an expert authority.</p>
-          </article>
-          <article>
-            <h3>Privacy</h3>
-            <p>The hub should minimise personal data, anonymise sensitive stories, and avoid exposing identity-based vulnerabilities.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="conclusion-section" aria-labelledby="conclusion-title">
-        <div class="section-heading">
-          <p class="eyebrow">Conclusion</p>
-          <h2 id="conclusion-title">Strong potential, with realistic limits.</h2>
-        </div>
-        <div class="conclusion-grid">
-          <article>
-            <span class="mini-label">Limitations</span>
+            <span>Task 1</span>
+            <h3>Business Model Canvas</h3>
             <p>
-              The model depends on student engagement, careful moderation, reliable privacy practice, and the chatbot's
-              ability to avoid overconfident cultural advice.
+              Customer segments include international students, domestic students wanting cross-cultural connection,
+              and new postgraduate students. Key resources are the chatbot, student knowledge, community trust, and
+              MQ partner networks.
             </p>
           </article>
           <article>
-            <span class="mini-label">Future direction</span>
+            <span>Task 2</span>
+            <h3>Value Proposition Canvas</h3>
             <p>
-              A mature version can expand into alumni mentoring, official MQ support referrals, multilingual content,
-              and stronger governance dashboards for bias and harm monitoring.
+              The core pains are loneliness, awkward cultural situations, fear of offending others, and isolation. The
+              gains are belonging, confidence, practical cultural understanding, and a cross-cultural network.
             </p>
           </article>
+          <article>
+            <span>Task 3</span>
+            <h3>Cynefin Domain</h3>
+            <p>
+              The domain is complex because cultural meaning is unpredictable, context-dependent, and evolving. The
+              business must probe, sense, and respond through community feedback.
+            </p>
+          </article>
+          <article>
+            <span>Task 4</span>
+            <h3>Socio-technical System</h3>
+            <p>
+              People, process, technology, data, and governance must work together. The chatbot supports interaction,
+              but moderators, student stories, privacy rules, and bias review create trust.
+            </p>
+          </article>
+          <article>
+            <span>Task 5</span>
+            <h3>Responsible AI</h3>
+            <p>
+              Relevant risks are cultural bias, unfair stereotypes, misinformation, offensive content, overconfident
+              advice, and privacy exposure from sensitive student experiences.
+            </p>
+          </article>
+          <article>
+            <span>Conclusion</span>
+            <h3>Limitations and Future</h3>
+            <p>
+              The service depends on student engagement, good moderation, and safe data use. Future versions can add
+              alumni mentoring, official MQ referrals, multilingual support, and governance dashboards.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="submission" class="submission-section" aria-labelledby="submission-title">
+        <div class="section-heading">
+          <p class="eyebrow">Assignment Timeline</p>
+          <h2 id="submission-title">Team responsibilities</h2>
+        </div>
+        <div class="timeline-grid">
+          <article>
+            <span>Draft</span>
+            <strong>19 May</strong>
+          </article>
+          <article>
+            <span>Final</span>
+            <strong>26 May</strong>
+          </article>
+          <article>
+            <span>Individual</span>
+            <strong>7 June</strong>
+          </article>
+          <article>
+            <span>Submission</span>
+            <strong>7 June</strong>
+          </article>
+        </div>
+        <div class="team-grid" aria-label="Team roles">
+          <article><span>Thomas</span><strong>Intro, conclusion, format, visuals</strong></article>
+          <article><span>Nguyet Anh Hoang</span><strong>Task 1 · BMC</strong></article>
+          <article><span>Dat</span><strong>Task 2 · VPC</strong></article>
+          <article><span>Nhung</span><strong>Task 3 · Cynefin</strong></article>
+          <article><span>Toan</span><strong>Task 4 · Socio-technical</strong></article>
+          <article><span>Linh</span><strong>Task 5 · Responsible AI</strong></article>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p>MQ Global Culture Hub · Demo website for AI_agent_culture assignment</p>
-      <a href="#top">Back to top</a>
+      <p>Global Guide · AI Agent Culture chatbot demo</p>
+      <a href="#chat">Back to chatbot</a>
     </footer>
 
     <script src="script.js"></script>
