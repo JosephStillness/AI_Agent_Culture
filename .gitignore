@@ -6,4 +6,6 @@ frontend/dist/
 *.iml
 .DS_Store
 .env
+.env.local
 frontend/.env
+frontend/.env.local
