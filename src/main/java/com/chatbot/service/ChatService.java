@@ -23,47 +23,142 @@ public class ChatService {
     private static final String MODEL = "gpt-4o-mini";
     private static final int MAX_TOKENS = 500;
     private static final String OUT_OF_SCOPE_REPLY = "I don't have information about that yet.";
-    private static final String GREETING_REPLY = "Hi! I can help with MQ student culture, belonging, cultural misunderstanding, group work communication, and responsible culture-chatbot behaviour.";
-    private static final List<String> IN_SCOPE_KEYWORDS = List.of(
-            "mq",
-            "macquarie",
+    private static final String GREETING_REPLY = "Hi! I can help with MQ student culture, cultural background, belonging, cultural misunderstanding, group work communication, and responsible culture-chatbot behaviour.";
+    private static final List<String> CULTURE_TOPIC_KEYWORDS = List.of(
             "culture",
             "cultural",
-            "student life",
-            "student",
-            "students",
-            "campus",
-            "university",
-            "sydney",
-            "international",
-            "domestic",
-            "group work",
+            "custom",
+            "customs",
+            "tradition",
+            "traditions",
+            "norm",
+            "norms",
+            "etiquette",
+            "identity",
+            "background",
+            "heritage",
+            "values",
+            "belief",
+            "beliefs",
+            "intercultural",
+            "cross-cultural",
+            "multicultural",
+            "diversity",
+            "diverse",
+            "stereotype",
+            "stereotypes",
+            "bias",
+            "fairness",
+            "respect",
+            "respectful",
+            "misunderstanding",
+            "communication",
             "feedback",
+            "language",
+            "english",
+            "accent",
+            "culture shock",
+            "adjust",
+            "adjustment",
+            "adapt",
+            "adaptation",
             "belonging",
             "belong",
             "lonely",
             "loneliness",
             "isolated",
             "isolation",
+            "homesick",
+            "homesickness",
             "friend",
             "friends",
             "connection",
             "community",
             "peer",
+            "peers",
             "club",
             "clubs",
-            "communication",
-            "misunderstanding",
-            "stereotype",
-            "stereotypes",
-            "bias",
-            "fairness",
-            "privacy",
-            "harm",
+            "group work",
+            "teamwork",
+            "class participation",
+            "participation",
             "responsible",
-            "safe",
-            "language exchange",
-            "culture shock"
+            "safe"
+    );
+    private static final List<String> STUDENT_CONTEXT_KEYWORDS = List.of(
+            "mq",
+            "macquarie",
+            "student",
+            "students",
+            "student life",
+            "campus",
+            "university",
+            "sydney",
+            "class",
+            "classroom",
+            "assignment",
+            "lecturer",
+            "tutor",
+            "international",
+            "domestic",
+            "group work",
+            "teamwork",
+            "peer",
+            "peers",
+            "club",
+            "clubs",
+            "orientation",
+            "study",
+            "studying"
+    );
+    private static final List<String> CULTURAL_BACKGROUND_KEYWORDS = List.of(
+            "bangladesh",
+            "bangladeshi",
+            "vietnam",
+            "vietnamese",
+            "china",
+            "chinese",
+            "india",
+            "indian",
+            "indonesia",
+            "indonesian",
+            "nepal",
+            "nepali",
+            "pakistan",
+            "pakistani",
+            "sri lanka",
+            "sri lankan",
+            "korea",
+            "korean",
+            "japan",
+            "japanese",
+            "malaysia",
+            "malaysian",
+            "singapore",
+            "singaporean",
+            "thailand",
+            "thai",
+            "philippines",
+            "filipino",
+            "australia",
+            "australian",
+            "first nations",
+            "aboriginal",
+            "arab",
+            "middle eastern",
+            "african",
+            "european",
+            "latin",
+            "latino",
+            "latina",
+            "hispanic",
+            "muslim",
+            "islam",
+            "hindu",
+            "buddhist",
+            "christian",
+            "faith",
+            "religion"
     );
     private static final List<String> OUT_OF_SCOPE_KEYWORDS = List.of(
             "code",
@@ -172,20 +267,31 @@ public class ChatService {
 
     private String buildSystemPrompt(String knowledgeContext) {
         return """
-                You are a helpful assistant with knowledge about student life and culture
-                at Macquarie University (MQ) in Sydney, Australia. Answer questions ONLY
-                based on the following knowledge base provided.
+                You are a helpful culture-support assistant for students at Macquarie
+                University (MQ) in Sydney, Australia. Answer questions ONLY based on
+                the following knowledge base provided.
 
                 Scope rules:
-                - Only answer questions about MQ student culture, student belonging,
-                  cultural misunderstanding, cross-cultural communication, respectful
-                  group work, student isolation, student community connection, and
+                - Answer culture-related student questions even when the wording is
+                  broad or imperfect. This includes cultural background, country or
+                  community culture, customs, communication norms, belonging,
+                  adaptation, language confidence, respectful group work, cultural
+                  misunderstanding, student isolation, community connection, and
                   responsible behaviour for a culture-support chatbot.
+                - If a question mentions a country, nationality, faith, or cultural
+                  group, do not give encyclopedia-style facts. Frame the answer as
+                  careful student-support guidance, avoid stereotypes, and mention
+                  that individuals vary.
+                - Do not invent country-specific details such as traditions, food,
+                  festivals, religion, language, history, or values unless those
+                  details are in the knowledge base. For broad country/culture
+                  questions, focus on the relevant culture-support guidance that is
+                  available.
                 - Do not answer questions about coding, programming, deployment,
                   general technology, maths, legal, medical, financial, or other
                   unrelated topics.
-                - If the answer is outside this scope or not found in the knowledge
-                  base, say exactly: 'I don't have information about that yet.'
+                - If the answer is outside culture/student scope or not supported by
+                  the knowledge base, say exactly: 'I don't have information about that yet.'
                 - Do not make up information. Be friendly and concise.
 
                 Knowledge base:
@@ -211,8 +317,14 @@ public class ChatService {
             return false;
         }
 
-        return IN_SCOPE_KEYWORDS.stream()
+        boolean asksCultureTopic = CULTURE_TOPIC_KEYWORDS.stream()
                 .anyMatch(normalizedMessage::contains);
+        boolean asksStudentContext = STUDENT_CONTEXT_KEYWORDS.stream()
+                .anyMatch(normalizedMessage::contains);
+        boolean mentionsCulturalBackground = CULTURAL_BACKGROUND_KEYWORDS.stream()
+                .anyMatch(normalizedMessage::contains);
+
+        return asksCultureTopic || (asksStudentContext && mentionsCulturalBackground);
     }
 
     private boolean isGreeting(String userMessage) {
