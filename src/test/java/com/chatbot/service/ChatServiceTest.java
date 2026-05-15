@@ -119,6 +119,37 @@ class ChatServiceTest {
     }
 
     @Test
+    void allowsMqCheckInMethodsAddedToKnowledgeBase() {
+        KnowledgeRepository knowledgeRepository = mock(KnowledgeRepository.class);
+        RestTemplate restTemplate = mock(RestTemplate.class);
+        ChatService chatService = new ChatService(
+                knowledgeRepository,
+                restTemplate,
+                new ObjectMapper(),
+                "test-key",
+                "https://example.com"
+        );
+
+        when(knowledgeRepository.findAll()).thenReturn(List.of(
+                new KnowledgeBase(
+                        "Blue Bridge check-in method",
+                        "The Blue Bridge check-in method is a simple MQ student belonging activity for group work.",
+                        "culture"
+                )
+        ));
+        when(restTemplate.postForEntity(eq("https://example.com"), any(HttpEntity.class), eq(String.class)))
+                .thenReturn(ResponseEntity.ok("""
+                        {"choices":[{"message":{"content":"The Blue Bridge check-in supports belonging before group work."}}]}
+                        """));
+
+        String reply = chatService.chat("What is the Blue Bridge check-in method at MQ?");
+
+        assertThat(reply).isEqualTo("The Blue Bridge check-in supports belonging before group work.");
+        verify(knowledgeRepository).findAll();
+        verify(restTemplate).postForEntity(eq("https://example.com"), any(HttpEntity.class), eq(String.class));
+    }
+
+    @Test
     void blocksCountryFactQuestionsWithoutCultureOrStudentContext() {
         KnowledgeRepository knowledgeRepository = mock(KnowledgeRepository.class);
         RestTemplate restTemplate = mock(RestTemplate.class);
