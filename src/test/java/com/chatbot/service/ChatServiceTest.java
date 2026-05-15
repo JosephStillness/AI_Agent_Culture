@@ -88,6 +88,37 @@ class ChatServiceTest {
     }
 
     @Test
+    void allowsDomesticAndInternationalStudentCollaborationQuestions() {
+        KnowledgeRepository knowledgeRepository = mock(KnowledgeRepository.class);
+        RestTemplate restTemplate = mock(RestTemplate.class);
+        ChatService chatService = new ChatService(
+                knowledgeRepository,
+                restTemplate,
+                new ObjectMapper(),
+                "test-key",
+                "https://example.com"
+        );
+
+        when(knowledgeRepository.findAll()).thenReturn(List.of(
+                new KnowledgeBase(
+                        "Mixed domestic and international groups",
+                        "In mixed domestic and international student groups at MQ, clarify roles, preferred communication channels, decision-making style, and what to do if someone is confused.",
+                        "culture"
+                )
+        ));
+        when(restTemplate.postForEntity(eq("https://example.com"), any(HttpEntity.class), eq(String.class)))
+                .thenReturn(ResponseEntity.ok("""
+                        {"choices":[{"message":{"content":"Clarify roles, communication channels, and decision-making style."}}]}
+                        """));
+
+        String reply = chatService.chat("How can domestic and international students work together better?");
+
+        assertThat(reply).isEqualTo("Clarify roles, communication channels, and decision-making style.");
+        verify(knowledgeRepository).findAll();
+        verify(restTemplate).postForEntity(eq("https://example.com"), any(HttpEntity.class), eq(String.class));
+    }
+
+    @Test
     void blocksCountryFactQuestionsWithoutCultureOrStudentContext() {
         KnowledgeRepository knowledgeRepository = mock(KnowledgeRepository.class);
         RestTemplate restTemplate = mock(RestTemplate.class);
