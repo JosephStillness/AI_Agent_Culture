@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   BookOpenText,
   Bot,
+  CalendarDays,
   Database,
   Loader2,
   MapPin,
@@ -19,6 +20,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import MqEvents from "@/components/MqEvents";
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
 
@@ -239,6 +241,12 @@ function App() {
               </a>
             </Button>
             <Button variant="ghost" size="sm" asChild>
+              <a href="#events">
+                <CalendarDays aria-hidden="true" />
+                Events
+              </a>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
               <a href="#knowledge">
                 <Database aria-hidden="true" />
                 Knowledge
@@ -375,6 +383,8 @@ function App() {
             Campus photo: Wikimedia Commons
           </a>
         </section>
+
+        <MqEvents apiUrl={apiUrl} />
 
         <section id="knowledge" className="mx-auto max-w-[1180px] px-4 py-16 sm:px-6 lg:px-8">
           <div className="mb-8 max-w-3xl space-y-3">
